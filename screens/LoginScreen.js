@@ -1,4 +1,5 @@
 import {
+  Alert,
   KeyboardAvoidingView,
   Pressable,
   StyleSheet,
@@ -6,14 +7,55 @@ import {
   TextInput,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem("authToken");
+
+        if (token) {
+          navigation.navigate("Home");
+        } else {
+          // token not found. show the login screen itself
+        }
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    checkLoginStatus();
+  }, []);
+
+  const handleLogin = async () => {
+    const user = {
+      email: email,
+      password: password,
+    };
+
+    await axios
+      .post("http://192.168.43.151:8000/login", user)
+      .then((response) => {
+        console.log(response);
+
+        const token = response.data.token;
+        AsyncStorage.setItem("authToken", token);
+
+        navigation.navigate("Home");
+      })
+      .catch((error) => {
+        Alert.alert("Login Error", "Invalid email or password");
+        console.log("Login Error", error);
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -59,7 +101,7 @@ export default function LoginScreen() {
             />
           </View>
 
-          <Pressable style={styles.loginBtn}>
+          <Pressable style={styles.loginBtn} onPress={handleLogin}>
             <Text style={styles.btnText}>Login</Text>
           </Pressable>
 
