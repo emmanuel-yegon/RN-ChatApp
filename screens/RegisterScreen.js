@@ -28,6 +28,7 @@ export default function RegisterScreen() {
     };
 
     //send a POST request to the backend API to reguster the user
+    // working http request with data -> .post("http://192.168.43.151:8000/register", user)
     axios
       .post("http://192.168.43.151:8000/register", user)
       .then((response) => {

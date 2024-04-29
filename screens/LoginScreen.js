@@ -24,7 +24,7 @@ export default function LoginScreen() {
         const token = await AsyncStorage.getItem("authToken");
 
         if (token) {
-          navigation.navigate("Home");
+          navigation.replace("Home");
         } else {
           // token not found. show the login screen itself
         }
@@ -35,13 +35,13 @@ export default function LoginScreen() {
     checkLoginStatus();
   }, []);
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     const user = {
       email: email,
       password: password,
     };
 
-    await axios
+    axios
       .post("http://192.168.43.151:8000/login", user)
       .then((response) => {
         console.log(response);
