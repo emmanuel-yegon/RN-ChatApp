@@ -4,6 +4,7 @@ import {
   Pressable,
   StyleSheet,
   Text,
+  TouchableOpacity,
   TextInput,
   View,
 } from "react-native";
@@ -24,7 +25,7 @@ export default function LoginScreen() {
         const token = await AsyncStorage.getItem("authToken");
 
         if (token) {
-          navigation.replace("Home");
+          // navigation.replace("Home");
         } else {
           // token not found. show the login screen itself
         }
@@ -50,6 +51,8 @@ export default function LoginScreen() {
         AsyncStorage.setItem("authToken", token);
 
         navigation.navigate("Home");
+        setEmail("");
+        setPassword("");
       })
       .catch((error) => {
         Alert.alert("Login Error", "Invalid email or password");
@@ -101,18 +104,18 @@ export default function LoginScreen() {
             />
           </View>
 
-          <Pressable style={styles.loginBtn} onPress={handleLogin}>
+          <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
             <Text style={styles.btnText}>Login</Text>
-          </Pressable>
+          </TouchableOpacity>
 
-          <Pressable
+          <TouchableOpacity
             style={{ marginTop: 15 }}
             onPress={() => navigation.navigate("Register")}
           >
             <Text style={{ color: "gray", fontSize: 16, textAlign: "center" }}>
               Don't have an account? Sign Up
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     </View>

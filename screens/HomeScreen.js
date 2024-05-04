@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
 import "core-js/stable/atob";
 import axios from "axios";
+import User from "../components/User";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -50,10 +51,15 @@ export default function HomeScreen() {
     fetchUsers();
   }, []);
 
-  //console.log("users", users);
+  console.log("users", users);
   return (
     <View>
-      <Text style={{ marginTop: 300 }}>HomeScreen</Text>
+      <View style={{ padding: 10 }}>
+        {users.map((item, index) => (
+          <User key={index} item={item} />
+        ))}
+      </View>
+      <Text>HomeScreen</Text>
     </View>
   );
 }

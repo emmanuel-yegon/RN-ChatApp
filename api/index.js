@@ -24,7 +24,6 @@ mongoose
   })
   .catch((err) => {
     console.log("Error connecting to MongoDb", err);
-    res.status(500).json({ message: "Error registering the user" });
   });
 
 app.listen(port, () => {
@@ -35,7 +34,6 @@ const User = require("./models/user");
 const Message = require("./models/message");
 
 //endpoint for registration of the user
-
 app.post("/register", (req, res) => {
   const { name, email, password, image } = req.body;
 

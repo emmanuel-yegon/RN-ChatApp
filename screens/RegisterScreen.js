@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
   Alert,
 } from "react-native";
@@ -120,18 +121,18 @@ export default function RegisterScreen() {
             />
           </View>
 
-          <Pressable style={styles.loginBtn} onPress={handleRegister}>
+          <TouchableOpacity style={styles.loginBtn} onPress={handleRegister}>
             <Text style={styles.btnText}>Register</Text>
-          </Pressable>
+          </TouchableOpacity>
 
-          <Pressable
+          <TouchableOpacity
             style={{ marginTop: 15 }}
             onPress={() => navigation.goBack()}
           >
             <Text style={{ color: "gray", fontSize: 16, textAlign: "center" }}>
               Already have an account? Sign In
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     </View>
