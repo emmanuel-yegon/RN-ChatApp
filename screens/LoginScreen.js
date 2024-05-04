@@ -19,22 +19,22 @@ export default function LoginScreen() {
 
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const token = await AsyncStorage.getItem("authToken");
+  // useEffect(() => {
+  //   const checkLoginStatus = async () => {
+  //     try {
+  //       const token = await AsyncStorage.getItem("authToken");
 
-        if (token) {
-          // navigation.replace("Home");
-        } else {
-          // token not found. show the login screen itself
-        }
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
-    checkLoginStatus();
-  }, []);
+  //       if (token) {
+  //         // navigation.replace("Home");
+  //       } else {
+  //         // token not found. show the login screen itself
+  //       }
+  //     } catch (error) {
+  //       console.log("error", error);
+  //     }
+  //   };
+  //   checkLoginStatus();
+  // }, []);
 
   const handleLogin = () => {
     const user = {
@@ -51,6 +51,7 @@ export default function LoginScreen() {
         AsyncStorage.setItem("authToken", token);
 
         navigation.navigate("Home");
+
         setEmail("");
         setPassword("");
       })

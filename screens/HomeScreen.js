@@ -25,7 +25,12 @@ export default function HomeScreen() {
       headerRight: () => (
         <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
           <Ionicons name="chatbox-ellipses-outline" size={24} color="black" />
-          <MaterialIcons name="people-outline" size={24} color="black" />
+          <MaterialIcons
+            name="people-outline"
+            size={24}
+            color="black"
+            onPress={() => navigation.navigate("Friends")}
+          />
         </View>
       ),
     });
@@ -59,7 +64,6 @@ export default function HomeScreen() {
           <User key={index} item={item} />
         ))}
       </View>
-      <Text>HomeScreen</Text>
     </View>
   );
 }
