@@ -1,11 +1,4 @@
-import {
-  Pressable,
-  StyleSheet,
-  Image,
-  Text,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { Pressable, StyleSheet, Image, Text, View } from "react-native";
 import React, { useContext } from "react";
 import { UserType } from "../UserContext";
 import { useNavigation } from "@react-navigation/native";
@@ -33,7 +26,6 @@ export default function FriendRequests({
           }),
         }
       );
-
       if (response.ok) {
         setFriendRequests(
           friendRequests.filter((request) => request._id !== friendRequestId)
@@ -41,9 +33,10 @@ export default function FriendRequests({
         navigation.navigate("Chats");
       }
     } catch (error) {
-      console.log("error accept friend request");
+      console.log("error accepting the friend reuest", error);
     }
   };
+
   return (
     <Pressable
       style={{
@@ -63,12 +56,12 @@ export default function FriendRequests({
         {item?.name} sent you a friend request
       </Text>
 
-      <TouchableOpacity
+      <Pressable
         style={{ backgroundColor: "#0066b2", padding: 10, borderRadius: 6 }}
         onPress={() => acceptRequest(item._id)}
       >
         <Text style={{ textAlign: "center", color: "white" }}>Accept</Text>
-      </TouchableOpacity>
+      </Pressable>
     </Pressable>
   );
 }

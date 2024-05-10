@@ -24,7 +24,12 @@ export default function HomeScreen() {
       ),
       headerRight: () => (
         <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-          <Ionicons name="chatbox-ellipses-outline" size={24} color="black" />
+          <Ionicons
+            name="chatbox-ellipses-outline"
+            size={24}
+            color="black"
+            onPress={() => navigation.navigate("Chats")}
+          />
           <MaterialIcons
             name="people-outline"
             size={24}
